@@ -223,8 +223,26 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const array1 = str.split('');
+  const array2 = array1.map((item) => {
+    let rot13;
+    if (
+      (item.charCodeAt() >= 65 && item.charCodeAt() <= 77)
+      || (item.charCodeAt() >= 97 && item.charCodeAt() <= 109)
+    ) {
+      rot13 = String.fromCharCode(item.charCodeAt() + 13);
+    } else if (
+      (item.charCodeAt() >= 78 && item.charCodeAt() <= 90)
+      || (item.charCodeAt() >= 110 && item.charCodeAt() <= 122)
+    ) {
+      rot13 = String.fromCharCode(item.charCodeAt() - 13);
+    } else {
+      return item;
+    }
+    return rot13;
+  });
+  return array2.join('');
 }
 
 /**
@@ -271,8 +289,12 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const cardsdeck = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  return cardsdeck.indexOf(value);
 }
 
 
