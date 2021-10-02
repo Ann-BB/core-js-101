@@ -37,11 +37,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  function iter(n, current, arr) {
-    if (n === len) return arr;
-    return iter(n + 1, current + 2, [...arr, current]);
-  }
-  return iter(0, 1, []);
+  return new Array(len).fill(0).map((item, index) => 2 * index + 1);
 }
 
 
@@ -279,15 +275,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  const array1 = [...arr];
-  const array2 = [];
-  return array1.reduce(
-    (a, b, i) => [
-      ...a,
-      ...Array.from({ length: i + 1 }, () => b),
-    ],
-    array2,
-  );
+  return arr.reduce((acc, item, i) => [...acc, ...Array(1 + i).fill(item)], []);
 }
 
 
@@ -305,12 +293,7 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-  const array1 = arr.sort((first, second) => first - second);
-  if (array1.length <= 3) {
-    return array1.reverse();
-  }
-  const array2 = array1.splice(-3);
-  return array2.reverse();
+  return arr.reverse().splice(0, 3);
 }
 
 
