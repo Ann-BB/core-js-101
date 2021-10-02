@@ -115,7 +115,6 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
   const C = Math.sqrt(x2 * x2 + y2 * y2);
   return Math.acos(A / (B * C));
 }
-
 /**
  * Returns a last digit of a integer number.
  *
@@ -162,7 +161,7 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-  return (a ** 2 + b ** 2 + c ** 2) ** (1 / 2);
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 /**
