@@ -450,17 +450,11 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  const M = new Array(n).fill(new Array(n).fill(0));
-  const M1 = M.map((item, index) => {
-    const itemMod = item.map((item2, index2) => {
-      if (index2 === index) {
-        return 1;
-      }
-      return 0;
-    });
-    return itemMod;
-  });
-  return M1;
+  return new Array(n).fill().map(
+    (row, rowIndex) => new Array(n).fill().map(
+      (el, elIndex) => (elIndex === rowIndex ? 1 : 0),
+    ),
+  );
 }
 
 /**
@@ -596,14 +590,14 @@ function getElementByIndexes(arr, indexes) {
 function swapHeadAndTail(arr) {
   if (arr.length === 1) return arr;
   if (arr.length === 2 || arr.length === 3) return arr.reverse();
-  const lastfLen = Math.floor(arr.length / 2);
-  const firstHalf = arr.slice(0, lastfLen);
+  const N = Math.floor(arr.length / 2);
+  const head = arr.slice(0, N);
   if (arr.length % 2 === 0) {
-    const sHalf = arr.slice(lastfLen);
-    return [...sHalf, ...firstHalf];
+    const tail = arr.slice(N);
+    return [...tail, ...head];
   }
-  const sHalf = arr.slice(lastfLen + 1);
-  return [...sHalf, arr[lastfLen], ...firstHalf];
+  const tail = arr.slice(N + 1);
+  return [...tail, arr[N], ...head];
 }
 
 
